@@ -1,0 +1,28 @@
+$objShell = New-Object -ComObject Shell.Application
+	$objFolder = $objShell.Namespace(0xA)
+	$WinTemp = "c:\Windows\Temp\*"
+
+
+Empty Recycle Bin #
+	write-Host "Emptying Recycle Bin." -ForegroundColor Cyan 
+	$objFolder.items() | %{ remove-item $_.path -Recurse -Confirm:$false}
+
+
+write-Host "Removing Temp" -ForegroundColor Green
+    Set-Location “C:\Windows\Temp”
+	Remove-Item * -Recurse -Force -ErrorAction SilentlyContinue
+
+
+write-Host "Prefetch" -ForegroundColor Yellow
+Set-Location “C:\Windows\Prefetch”
+Remove-Item * -Recurse -Force -ErrorAction SilentlyContinue
+
+
+#write-Host "SoftwareDistribution" -ForegroundColor Red
+#Set-Location “C:\Windows\SoftwareDistribution”
+#Remove-Item * -Recurse -Force -ErrorAction SilentlyContinue
+
+
+
+ write-Host "CleanUp Task Has been Completed Successfully,Bye Bye(lnw.com)" -ForegroundColor yellow
+
